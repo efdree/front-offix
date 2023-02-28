@@ -1,7 +1,6 @@
 export const fonts = {
-  primary: `"Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-  Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif`,
-  secondary: `Inter`,
+  primary: `Inter`,
+  secondary: `Monserrat`,
 };
 
 export const typography = {
