@@ -71,7 +71,6 @@ function NewDepartment(){
     name:'',
     description:'',
     cover:'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png',
-    employee_count: 0
   });
 
   function handleChange(event){
