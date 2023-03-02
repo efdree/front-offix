@@ -81,5 +81,7 @@ export const global = css`
     font-family: ${fonts.primary};
     color: ${colors.black};
     background-color: ${colors.background};
+    width: 360px;
+    margin: 0 auto;
   }
 `;
