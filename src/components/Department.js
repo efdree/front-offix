@@ -60,11 +60,13 @@ const ActionLink = styled.a`
     width: 28px;
     height: 28px;
     color: white;
+    padding: 4px;
+    
 `
 
 function Department({department}){
     return (
-        <WrapperLi key={department.id}>
+        <WrapperLi key={department.id.toString()}>
           <ContImage>
             <Image src={department.cover} alt={department.id} />
           </ContImage>

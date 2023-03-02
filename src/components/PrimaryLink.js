@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-const Button = styled.button`
+const PrimaryLink = styled.a`
     padding: 8px 16px;
     background: #757575;
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
@@ -14,12 +14,10 @@ const Button = styled.button`
     border: none;
     corsor: pointer;
     font-family: 'Inter';
-    width: 100%;
-    margin: 8px 0px 8px 0px;
 
     &:hover {
         background: hsla(215, 14%, 34%, 1);
     }
 `
 
-export default Button
+export default PrimaryLink

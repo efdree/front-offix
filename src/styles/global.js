@@ -45,6 +45,14 @@ export const reset = css`
   a:not([class]) {
     text-decoration-skip-ink: auto;
   }
+  a {
+    text-decoration:none;
+    color: auto;
+  }
+  a:link, a:visited, a:active {
+    text-decoration:none;
+    color: auto;
+}
   /* Make images easier to work with */
   img,
   picture {
@@ -57,6 +65,9 @@ export const reset = css`
   textarea,
   select {
     font: inherit;
+  }
+  #root{
+    background-color:white;
   }
   /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
   @media (prefers-reduced-motion: reduce) {

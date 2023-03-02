@@ -1,0 +1,47 @@
+[
+  {
+    "name": "erik",
+    "nationality": "peruano",
+    "birth_date": "2023-02-28",
+    "department_id": 1,
+    "id": 1,
+    "role": "admin",
+    "avatar": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/90.png"
+  },
+  {
+    "name": "gaby",
+    "nationality": "peruana",
+    "birth_date": "2023-02-28",
+    "department_id": 1,
+    "id": 2,
+    "role": "admin",
+    "avatar": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/99.png"
+  },
+  {
+    "name": "osmar",
+    "nationality": "peruano",
+    "birth_date": "2023-02-28",
+    "department_id": 1,
+    "id": 3,
+    "role": "admin",
+    "avatar": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/79.png"
+  },
+  {
+    "name": "mario",
+    "nationality": "colombiano",
+    "birth_date": "2023-02-28",
+    "department_id": 2,
+    "id": 4,
+    "role": "sale",
+    "avatar": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/69.png"
+  },
+  {
+    "name": "oscar",
+    "nationality": "mexicano",
+    "birth_date": "2023-02-28",
+    "department_id": 2,
+    "id": 5,
+    "role": "sale",
+    "avatar": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/49.png"
+  }
+]

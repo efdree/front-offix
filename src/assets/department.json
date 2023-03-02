@@ -1,0 +1,16 @@
+[
+    {
+      "cover": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/7.png",
+      "name": "tech",
+      "description": "tech description",
+      "id": 1,
+      "employee_count": 0
+    },
+    {
+      "cover": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/1.png",
+      "name": "sales",
+      "description": "sales description",
+      "id": 2,
+      "employee_count": 0
+    }
+  ]
