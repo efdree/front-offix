@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import Button from "../components/Button";
 import Input from "../components/Input";
 import Textarea from "../components/Textarea";
 import logo from "../assets/logo.png";
-import { Link } from "react-router-dom";
-import { createDepartment } from "../services/departments-service";
+import { Link, useLocation } from "react-router-dom";
+import { createDepartment , getDepartment } from "../services/departments-service";
 
 const Header = styled.div`
   background: #F2F2F2;
@@ -64,7 +64,6 @@ const ContentForm = styled.form`
   flex-direction: column;
   gap: 16px;
 `
-
 const ContentLink = styled.div`
   width: 100%;
   display: flex;
@@ -78,19 +77,17 @@ const SecondaryLink = {
   borderRadius: "4px",
   letterSpacing: "0.1em",
   textTransform: "uppercase",
-  color: "#303036",
+  color: "#ffffff",
   fontWeight: "500",
   fontSize: "14px",
   lineHeight: "20px",
   border: "none",
   corsor: "pointer",
   fontFamily: 'Inter',
-  Width: "100%",
-  textAlign: "center",
   margin: "8px 0px 32px 0px"
 }
 
-function NewDepartment(){
+function EditDepartment(){
   const [formData, setFormData] = useState({
     name:'',
     description:'',
@@ -104,8 +101,20 @@ function NewDepartment(){
 
   function handleSubmit(event){
     event.preventDefault();
-    createDepartment(formData);
+    //createDepartment(formData);
+    console.log("Updated");
   }
+
+  const [departments, setDepartments] = useState([]);
+
+  const { name, description } = departments[0];
+
+  const location = useLocation();
+
+  useEffect(() => { 
+    getDepartment(location.pathname.split("/").reverse()[0])
+      .then(setDepartments);
+  },[]);
 
   return (
         <div>
@@ -116,26 +125,26 @@ function NewDepartment(){
             </form>
           </Header>
           <Content>
-              <Title>New Department</Title>
+              <Title>Edit Department</Title>
               <ContentForm onSubmit={handleSubmit}>
                 <Input 
                   placeholder={"Secret planning"} 
                   label="Name"
                   name="name"  
-                  value={formData.name} 
+                  value={name} 
                   onChange={handleChange}/>
                 <Textarea 
                   placeholder={"This is the best department yet..."} 
                   label="Description"
                   name="description"
-                  value={formData.description} 
+                  value={description} 
                   onChange={handleChange}
                   />
                 <div>
                   <StyledLabel>Cover</StyledLabel>
                   <InputFile type="file" name="cover"/>
                 </div>
-                <Button type="submit">Create Department</Button>
+                <Button type="submit">Edit Department</Button>
               </ContentForm>
               <ContentLink>
                 <Link to="/" style={SecondaryLink}>Back</Link>
@@ -148,4 +157,4 @@ function NewDepartment(){
     )
 }
 
-export default NewDepartment;
+export default EditDepartment;

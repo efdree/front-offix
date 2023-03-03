@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { FiEdit2 } from 'react-icons/fi';
 import { HiOutlineTrash } from 'react-icons/hi';
+import { Link } from "react-router-dom";
 
 const WrapperLi = styled.li`
     box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -2px rgba(0, 0, 0, 0.05);
@@ -53,20 +54,19 @@ const ContLinks = styled.div`
     text-align: center;
 `
 
-const ActionLink = styled.a`
-    background: #757575;
-    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
-    border-radius: 50px;
-    width: 28px;
-    height: 28px;
-    color: white;
-    padding: 4px;
-    
-`
+const ActionLink = {
+    background: "#757575",
+    boxShadow: "0px 1px 2px rgba(0, 0, 0, 0.05)",
+    borderRadius: "50px",
+    width: "28px",
+    height: "28px",
+    color: "white",
+    padding: "4px"
+    }
 
-function Department({department}){
+function Department({id, department}){
     return (
-        <WrapperLi key={department.id.toString()}>
+        <WrapperLi key={id}>
           <ContImage>
             <Image src={department.cover} alt={department.id} />
           </ContImage>
@@ -75,8 +75,8 @@ function Department({department}){
             <EmployeeCount>{department.employee_count} employees</EmployeeCount>
           </ContBaseInfo>
           <ContLinks>
-            <ActionLink href="home"><FiEdit2 /></ActionLink>
-            <ActionLink href="home"><HiOutlineTrash /></ActionLink>  
+            <Link to={"/editDepartment/" + department.id} style={ActionLink}><FiEdit2 /></Link>
+            <Link to="/" style={ActionLink}><HiOutlineTrash /></Link>  
           </ContLinks>
         </WrapperLi> 
     )

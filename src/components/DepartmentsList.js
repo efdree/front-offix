@@ -10,7 +10,7 @@ function DepartmentsList({departments}){
         <WrapperUl>
         {departments.map((department) => 
         ( 
-            <Department department={department} />
+            <Department key={department.id} department={department} />
         ))}
       </WrapperUl>
     )

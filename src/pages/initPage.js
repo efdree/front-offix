@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { getDepartments } from "../services/departments-service";
 import DepartmentsList from "../components/DepartmentsList";
-import PrimaryLink from "../components/PrimaryLink";
 import styled from "@emotion/styled";
 import Input from "../components/Input";
 import logo from "../assets/logo.png";
@@ -42,6 +41,23 @@ const Footer = styled.div`
   line-height: 20px;
   padding: 16px;
 `
+
+const PrimaryLink = {
+    padding: "8px 16px",
+    background: "#757575",
+    boxShadow: "0px 1px 2px rgba(0, 0, 0, 0.05)",
+    borderRadius: "4px",
+    letterSpacing: "0.1em",
+    textTransform: "uppercase",
+    color: "#ffffff",
+    fontWeight: "500",
+    fontSize: "14px",
+    lineHeight: "20px",
+    border: "none",
+    corsor: "pointer",
+    fontFamily: 'Inter'
+  }
+
 function InitPage() {
   const [departments, setDepartments] = useState([]);
 
@@ -60,7 +76,7 @@ function InitPage() {
         </Header>
         <Content>
           <Title>Departments</Title>
-          <PrimaryLink><Link to="/newDepartment">New Department</Link></PrimaryLink>
+          <Link to="/newDepartment" style={PrimaryLink}>New Department</Link>
           <DepartmentsList departments={departments} />
         </Content>
         <Footer>
