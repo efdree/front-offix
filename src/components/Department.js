@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { FiEdit2 } from 'react-icons/fi';
 import { HiOutlineTrash } from 'react-icons/hi';
 import { Link } from "react-router-dom";
+import EditDepartment from "../pages/editDepartment";
 
 const WrapperLi = styled.li`
     box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -2px rgba(0, 0, 0, 0.05);

@@ -4,8 +4,8 @@ import Button from "../components/Button";
 import Input from "../components/Input";
 import Textarea from "../components/Textarea";
 import logo from "../assets/logo.png";
-import { Link, useLocation } from "react-router-dom";
-import { createDepartment , getDepartment } from "../services/departments-service";
+import { Link, useLocation, useParams } from "react-router-dom";
+import { getDepartment, updateDepartment } from "../services/departments-service";
 
 const Header = styled.div`
   background: #F2F2F2;
@@ -88,10 +88,23 @@ const SecondaryLink = {
 }
 
 function EditDepartment(){
+  const [departments, setDepartments] = useState([{
+    name:"",
+    description:"",
+    cover: "",
+  }]);
+
+  let params = useParams();
+
+  useEffect(() => { 
+    getDepartment(Number(params.id))
+    .then(setDepartments);
+  },[]);
+
   const [formData, setFormData] = useState({
     name:'',
     description:'',
-    cover:'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png',
+    cover:`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${params.id}.png`,
   });
 
   function handleChange(event){
@@ -101,22 +114,10 @@ function EditDepartment(){
 
   function handleSubmit(event){
     event.preventDefault();
-    //createDepartment(formData);
-    console.log("Updated");
+    updateDepartment(params.id, formData);
   }
 
-  const [departments, setDepartments] = useState([]);
-
-  const { name, description } = departments[0];
-
-  const location = useLocation();
-
-  useEffect(() => { 
-    getDepartment(location.pathname.split("/").reverse()[0])
-      .then(setDepartments);
-  },[]);
-
-  return (
+    return (
         <div>
           <Header>
             <Brand src={logo} alt="logo" />        
@@ -128,16 +129,16 @@ function EditDepartment(){
               <Title>Edit Department</Title>
               <ContentForm onSubmit={handleSubmit}>
                 <Input 
-                  placeholder={"Secret planning"} 
+                  placeholder={""} 
                   label="Name"
                   name="name"  
-                  value={name} 
+                  value={ formData.name ? formData.name : departments[0].name} 
                   onChange={handleChange}/>
                 <Textarea 
-                  placeholder={"This is the best department yet..."} 
+                  placeholder={""} 
                   label="Description"
                   name="description"
-                  value={description} 
+                  value={formData.description ? formData.description: departments[0].description} 
                   onChange={handleChange}
                   />
                 <div>

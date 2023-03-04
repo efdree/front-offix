@@ -12,7 +12,8 @@ export function createDepartment(department){
     return apiFetch("/departments", {body:department});
 }
 
-export function updateDepartment(department){
+export function updateDepartment(id, department){
     console.log(department);
-    return apiFetch(`/department/${department.id}`, {method: "PATCH", body: department});    
+    console.log(id);
+    return apiFetch(`/department/${id}`, {method: "PUT", body: department});    
 }

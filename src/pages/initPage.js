@@ -60,7 +60,7 @@ const PrimaryLink = {
 
 function InitPage() {
   const [departments, setDepartments] = useState([]);
-
+  console.log(departments);
   useEffect(() => {
     getDepartments()
       .then(setDepartments);
