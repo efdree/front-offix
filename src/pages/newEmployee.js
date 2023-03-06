@@ -2,14 +2,11 @@ import { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import Button from "../components/Button";
 import Input from "../components/Input";
-import Textarea from "../components/Textarea";
 import logo from "../assets/logo.png";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import {
-  getDepartment,
-  updateDepartment,
-} from "../services/departments-service";
+import { createEmployee } from "../services/employees-service";
+import { getDepartments } from "../services/departments-service";
 
 const Header = styled.div`
   background: #f2f2f2;
@@ -68,10 +65,20 @@ const ContentForm = styled.form`
   flex-direction: column;
   gap: 16px;
 `;
+
 const ContentLink = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+`;
+
+const Select = styled.select`
+  border-radius: 6px;
+  padding: 8px 12px;
+  background: #ffffff;
+  border: 1px solid #d3d3d3;
+  box-shadow: 0px 1px 2pp rgba(0, 0, 0, 0.05);
+  width: 100%;
 `;
 
 const SecondaryLink = {
@@ -88,33 +95,21 @@ const SecondaryLink = {
   border: "none",
   corsor: "pointer",
   fontFamily: "Inter",
+  Width: "100%",
   textAlign: "center",
   margin: "8px 0px 32px 0px",
 };
 
-function EditDepartment() {
+function NewEmployee() {
   const navigate = useNavigate();
-
-  const [departments, setDepartments] = useState([
-    {
-      name: "",
-      description: "",
-      cover: "",
-      employee_count: 0,
-    },
-  ]);
-
-  let params = useParams();
-
-  useEffect(() => {
-    getDepartment(Number(params.id)).then(setDepartments);
-  }, [params.id]);
-
   const [formData, setFormData] = useState({
     name: "",
-    description: "",
-    cover: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${params.id}.png`,
-    employee_count: departments[0].employee_count,
+    nationality: "",
+    role: "",
+    birth_date: "",
+    avatar:
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+    department_id: 0,
   });
 
   function handleChange(event) {
@@ -123,16 +118,16 @@ function EditDepartment() {
   }
 
   function handleSubmit(event) {
-    formData.name = formData.name ? formData.name : departments[0].name;
-    formData.description = formData.description
-      ? formData.description
-      : departments[0].description;
-    formData.cover = formData.cover ? formData.cover : departments[0].cover;
-    formData.employee_count = departments[0].employee_count;
     event.preventDefault();
-    updateDepartment(params.id, formData);
-    navigate("/");
+    console.log(formData);
+    createEmployee(formData);
+    navigate(`/showDepartment/${formData.department_id}`);
   }
+
+  const [departments, setDepartments] = useState([]);
+  useEffect(() => {
+    getDepartments().then(setDepartments);
+  }, []);
 
   return (
     <div>
@@ -143,31 +138,57 @@ function EditDepartment() {
         </form>
       </Header>
       <Content>
-        <Title>Edit Department</Title>
+        <Title>New Employee</Title>
         <ContentForm onSubmit={handleSubmit}>
           <Input
-            placeholder={""}
+            placeholder={"John Doe"}
             label="Name"
             name="name"
-            value={formData.name ? formData.name : departments[0].name}
+            value={formData.name}
             onChange={handleChange}
           />
-          <Textarea
+          <Input
+            placeholder={"Peruano"}
+            label="Nationality"
+            name="nationality"
+            value={formData.nationality}
+            onChange={handleChange}
+          />
+          <Input
+            placeholder={"Eternal Apprentice"}
+            label="Role"
+            name="role"
+            value={formData.role}
+            onChange={handleChange}
+          />
+          <Input
             placeholder={""}
-            label="Description"
-            name="description"
-            value={
-              formData.description
-                ? formData.description
-                : departments[0].description
-            }
+            label="Birth date"
+            name="birth_date"
+            type="date"
+            value={formData.birth_date}
             onChange={handleChange}
           />
           <div>
-            <StyledLabel>Cover</StyledLabel>
-            <InputFile type="file" name="cover" />
+            <StyledLabel>department</StyledLabel>
+            <Select
+              name="department_id"
+              value={formData.department_id}
+              onChange={handleChange}
+            >
+              <option value="0">{"--Choose an option--"}</option>
+              {departments.map((department) => (
+                <option key={department.id} value={department.id}>
+                  {department.name}
+                </option>
+              ))}
+            </Select>
           </div>
-          <Button type="submit">Edit Department</Button>
+          <div>
+            <StyledLabel>Avatar</StyledLabel>
+            <InputFile type="file" name="avatar" />
+          </div>
+          <Button type="submit">Create Employee</Button>
         </ContentForm>
         <ContentLink>
           <Link to="/" style={SecondaryLink}>
@@ -180,4 +201,4 @@ function EditDepartment() {
   );
 }
 
-export default EditDepartment;
+export default NewEmployee;
