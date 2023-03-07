@@ -1,23 +1,8 @@
 import { useState, useEffect } from "react";
 import styled from "@emotion/styled";
-import Input from "../components/Input";
-import logo from "../assets/logo.png";
 import { Link, useParams } from "react-router-dom";
 import { getDepartment } from "../services/departments-service";
-
 import EmployeeList from "../components/EmployeeList";
-
-const Header = styled.div`
-  background: #f2f2f2;
-  padding: 16px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-`;
-const Brand = styled.img`
-  width: 148px;
-  height: 25px;
-`;
 
 const Title = styled.h2`
   font-family: "Montserrat";
@@ -51,17 +36,6 @@ const SubTitle = styled.h3`
 
 const Content = styled.div`
   margin: 0px 16px;
-`;
-
-const Footer = styled.div`
-  background: #f2f2f2;
-  text-align: center;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
-  padding: 16px;
 `;
 
 const ContentLink = styled.div`
@@ -133,29 +107,20 @@ function ShowDepartment() {
   }, [params.id]);
 
   return (
-    <div>
-      <Header>
-        <Brand src={logo} alt="logo" />
-        <form>
-          <Input placeholder={"search"} />
-        </form>
-      </Header>
-      <Content>
-        <Title>{departments[0].name}</Title>
-        <Description>{departments[0].description}</Description>
-        <SubTitle>Employees</SubTitle>
-        <Link to="/newEmployee" style={PrimaryLink}>
-          New Employee
+    <Content>
+      <Title>{departments[0].name}</Title>
+      <Description>{departments[0].description}</Description>
+      <SubTitle>Employees</SubTitle>
+      <Link to="/newEmployee" style={PrimaryLink}>
+        New Employee
+      </Link>
+      <EmployeeList employees={departments[1]} />
+      <ContentLink>
+        <Link to="/" style={SecondaryLink}>
+          Back
         </Link>
-        <EmployeeList employees={departments[1]} />
-        <ContentLink>
-          <Link to="/" style={SecondaryLink}>
-            Back
-          </Link>
-        </ContentLink>
-      </Content>
-      <Footer>© 2021 - Offix</Footer>
-    </div>
+      </ContentLink>
+    </Content>
   );
 }
 

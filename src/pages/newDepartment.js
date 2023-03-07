@@ -3,22 +3,9 @@ import styled from "@emotion/styled";
 import Button from "../components/Button";
 import Input from "../components/Input";
 import Textarea from "../components/Textarea";
-import logo from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { createDepartment } from "../services/departments-service";
-
-const Header = styled.div`
-  background: #f2f2f2;
-  padding: 16px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-`;
-const Brand = styled.img`
-  width: 148px;
-  height: 25px;
-`;
 
 const Title = styled.h2`
   font-family: "Montserrat";
@@ -32,17 +19,6 @@ const Title = styled.h2`
 
 const Content = styled.div`
   margin: 0px 16px;
-`;
-
-const Footer = styled.div`
-  background: #f2f2f2;
-  text-align: center;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
-  padding: 16px;
 `;
 
 const InputFile = styled.input`
@@ -113,44 +89,35 @@ function NewDepartment() {
   }
 
   return (
-    <div>
-      <Header>
-        <Brand src={logo} alt="logo" />
-        <form>
-          <Input placeholder={"search"} />
-        </form>
-      </Header>
-      <Content>
-        <Title>New Department</Title>
-        <ContentForm onSubmit={handleSubmit}>
-          <Input
-            placeholder={"Secret planning"}
-            label="Name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-          />
-          <Textarea
-            placeholder={"This is the best department yet..."}
-            label="Description"
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-          />
-          <div>
-            <StyledLabel>Cover</StyledLabel>
-            <InputFile type="file" name="cover" />
-          </div>
-          <Button type="submit">Create Department</Button>
-        </ContentForm>
-        <ContentLink>
-          <Link to="/" style={SecondaryLink}>
-            Back
-          </Link>
-        </ContentLink>
-      </Content>
-      <Footer>© 2021 - Offix</Footer>
-    </div>
+    <Content>
+      <Title>New Department</Title>
+      <ContentForm onSubmit={handleSubmit}>
+        <Input
+          placeholder={"Secret planning"}
+          label="Name"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+        />
+        <Textarea
+          placeholder={"This is the best department yet..."}
+          label="Description"
+          name="description"
+          value={formData.description}
+          onChange={handleChange}
+        />
+        <div>
+          <StyledLabel>Cover</StyledLabel>
+          <InputFile type="file" name="cover" />
+        </div>
+        <Button type="submit">Create Department</Button>
+      </ContentForm>
+      <ContentLink>
+        <Link to="/" style={SecondaryLink}>
+          Back
+        </Link>
+      </ContentLink>
+    </Content>
   );
 }
 

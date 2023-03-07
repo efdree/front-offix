@@ -8,6 +8,10 @@ export function getEmployee(id) {
   return apiFetch(`/employee/${id}`);
 }
 
+export function searchEmployees(query) {
+  return apiFetch(`/employees/?name=${query}`);
+}
+
 export function createEmployee(employee) {
   return apiFetch("/employees", { body: employee });
 }

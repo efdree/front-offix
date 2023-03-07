@@ -2,23 +2,10 @@ import { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import Button from "../components/Button";
 import Input from "../components/Input";
-import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { createEmployee } from "../services/employees-service";
 import { getDepartments } from "../services/departments-service";
-
-const Header = styled.div`
-  background: #f2f2f2;
-  padding: 16px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-`;
-const Brand = styled.img`
-  width: 148px;
-  height: 25px;
-`;
 
 const Title = styled.h2`
   font-family: "Montserrat";
@@ -32,17 +19,6 @@ const Title = styled.h2`
 
 const Content = styled.div`
   margin: 0px 16px;
-`;
-
-const Footer = styled.div`
-  background: #f2f2f2;
-  text-align: center;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
-  padding: 16px;
 `;
 
 const InputFile = styled.input`
@@ -130,74 +106,65 @@ function NewEmployee() {
   }, []);
 
   return (
-    <div>
-      <Header>
-        <Brand src={logo} alt="logo" />
-        <form>
-          <Input placeholder={"search"} />
-        </form>
-      </Header>
-      <Content>
-        <Title>New Employee</Title>
-        <ContentForm onSubmit={handleSubmit}>
-          <Input
-            placeholder={"John Doe"}
-            label="Name"
-            name="name"
-            value={formData.name}
+    <Content>
+      <Title>New Employee</Title>
+      <ContentForm onSubmit={handleSubmit}>
+        <Input
+          placeholder={"John Doe"}
+          label="Name"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+        />
+        <Input
+          placeholder={"Peruano"}
+          label="Nationality"
+          name="nationality"
+          value={formData.nationality}
+          onChange={handleChange}
+        />
+        <Input
+          placeholder={"Eternal Apprentice"}
+          label="Role"
+          name="role"
+          value={formData.role}
+          onChange={handleChange}
+        />
+        <Input
+          placeholder={""}
+          label="Birth date"
+          name="birth_date"
+          type="date"
+          value={formData.birth_date}
+          onChange={handleChange}
+        />
+        <div>
+          <StyledLabel>department</StyledLabel>
+          <Select
+            name="department_id"
+            value={formData.department_id}
             onChange={handleChange}
-          />
-          <Input
-            placeholder={"Peruano"}
-            label="Nationality"
-            name="nationality"
-            value={formData.nationality}
-            onChange={handleChange}
-          />
-          <Input
-            placeholder={"Eternal Apprentice"}
-            label="Role"
-            name="role"
-            value={formData.role}
-            onChange={handleChange}
-          />
-          <Input
-            placeholder={""}
-            label="Birth date"
-            name="birth_date"
-            type="date"
-            value={formData.birth_date}
-            onChange={handleChange}
-          />
-          <div>
-            <StyledLabel>department</StyledLabel>
-            <Select
-              name="department_id"
-              value={formData.department_id}
-              onChange={handleChange}
-            >
-              <option value="0">{"--Choose an option--"}</option>
-              {departments.map((department) => (
-                <option key={department.id} value={department.id}>
-                  {department.name}
-                </option>
-              ))}
-            </Select>
-          </div>
-          <div>
-            <StyledLabel>Avatar</StyledLabel>
-            <InputFile type="file" name="avatar" />
-          </div>
-          <Button type="submit">Create Employee</Button>
-        </ContentForm>
-        <ContentLink>
-          <Link to="/" style={SecondaryLink}>
-            Back
-          </Link>
-        </ContentLink>
-      </Content>
-      <Footer>© 2021 - Offix</Footer>
-    </div>
+          >
+            <option value="0">{"--Choose an option--"}</option>
+            {departments.map((department) => (
+              <option key={department.id} value={department.id}>
+                {department.name}
+              </option>
+            ))}
+          </Select>
+        </div>
+        <div>
+          <StyledLabel>Avatar</StyledLabel>
+          <InputFile type="file" name="avatar" />
+        </div>
+        <Button type="submit">Create Employee</Button>
+      </ContentForm>
+      <ContentLink>
+        <Link to="/" style={SecondaryLink}>
+          Back
+        </Link>
+      </ContentLink>
+    </Content>
   );
 }
 

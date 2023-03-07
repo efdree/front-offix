@@ -1,26 +1,11 @@
 import { useState, useEffect } from "react";
 import styled from "@emotion/styled";
-import Input from "../components/Input";
-import logo from "../assets/logo.png";
 import { Link, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { getEmployee } from "../services/employees-service";
 import { FiEdit2 } from "react-icons/fi";
 import { HiOutlineTrash } from "react-icons/hi";
 import { deleteEmployee } from "../services/employees-service";
-import { getDepartment } from "../services/departments-service";
-
-const Header = styled.div`
-  background: #f2f2f2;
-  padding: 16px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-`;
-const Brand = styled.img`
-  width: 148px;
-  height: 25px;
-`;
 
 const ContImage = styled.div`
   display: flex;
@@ -86,17 +71,6 @@ const BirthDate = styled.p`
 const Content = styled.div`
   margin: 0px 16px;
   text-align: center;
-`;
-
-const Footer = styled.div`
-  background: #f2f2f2;
-  text-align: center;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
-  padding: 16px;
 `;
 
 const ContentLink = styled.div`
@@ -174,45 +148,36 @@ function ShowEmployee() {
   const age = Math.abs(year - 1970);
 
   return (
-    <div>
-      <Header>
-        <Brand src={logo} alt="logo" />
-        <form>
-          <Input placeholder={"search"} />
-        </form>
-      </Header>
-      <Content>
-        <ContImage>
-          <Image src={employees.avatar} alt={employees.id} />
-        </ContImage>
+    <Content>
+      <ContImage>
+        <Image src={employees.avatar} alt={employees.id} />
+      </ContImage>
 
-        <Title>{employees.name}</Title>
-        <Role>{employees.role}</Role>
-        <DepartmentName>
-          {employees.department_id ? employees.department_id.name : ""}
-        </DepartmentName>
-        <Nationality>{employees.nationality}</Nationality>
-        <BirthDate>
-          {age + " "}
-          years
-        </BirthDate>
-        <ContLinks>
-          <Link to={"/editEmployee/" + employees.id} style={ActionLink}>
-            <FiEdit2 />
-          </Link>
-          <Link to="/" style={ActionLink} onClick={handleClick}>
-            <HiOutlineTrash />
-          </Link>
-        </ContLinks>
+      <Title>{employees.name}</Title>
+      <Role>{employees.role}</Role>
+      <DepartmentName>
+        {employees.department_id ? employees.department_id.name : ""}
+      </DepartmentName>
+      <Nationality>{employees.nationality}</Nationality>
+      <BirthDate>
+        {age + " "}
+        years
+      </BirthDate>
+      <ContLinks>
+        <Link to={"/editEmployee/" + employees.id} style={ActionLink}>
+          <FiEdit2 />
+        </Link>
+        <Link to="/" style={ActionLink} onClick={handleClick}>
+          <HiOutlineTrash />
+        </Link>
+      </ContLinks>
 
-        <ContentLink>
-          <Link to="/" style={SecondaryLink}>
-            Back
-          </Link>
-        </ContentLink>
-      </Content>
-      <Footer>© 2021 - Offix</Footer>
-    </div>
+      <ContentLink>
+        <Link to="/" style={SecondaryLink}>
+          Back
+        </Link>
+      </ContentLink>
+    </Content>
   );
 }
 

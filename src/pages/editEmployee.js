@@ -3,22 +3,9 @@ import styled from "@emotion/styled";
 import Button from "../components/Button";
 import Input from "../components/Input";
 import { useNavigate } from "react-router-dom";
-import logo from "../assets/logo.png";
 import { Link, useParams } from "react-router-dom";
 import { getEmployee, updateEmployee } from "../services/employees-service";
 import { getDepartments } from "../services/departments-service";
-
-const Header = styled.div`
-  background: #f2f2f2;
-  padding: 16px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-`;
-const Brand = styled.img`
-  width: 148px;
-  height: 25px;
-`;
 
 const Title = styled.h2`
   font-family: "Montserrat";
@@ -32,17 +19,6 @@ const Title = styled.h2`
 
 const Content = styled.div`
   margin: 0px 16px;
-`;
-
-const Footer = styled.div`
-  background: #f2f2f2;
-  text-align: center;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
-  padding: 16px;
 `;
 
 const InputFile = styled.input`
@@ -154,83 +130,72 @@ function EditEmployee() {
   }, []);
 
   return (
-    <div>
-      <Header>
-        <Brand src={logo} alt="logo" />
-        <form>
-          <Input placeholder={"search"} />
-        </form>
-      </Header>
-      <Content>
-        <Title>Edit Employee</Title>
-        <ContentForm onSubmit={handleSubmit}>
-          <Input
-            placeholder={""}
-            label="Name"
-            name="name"
-            value={formData.name ? formData.name : employees.name}
-            onChange={handleChange}
-          />
-          <Input
-            placeholder={""}
-            label="Nationality"
-            name="nationality"
+    <Content>
+      <Title>Edit Employee</Title>
+      <ContentForm onSubmit={handleSubmit}>
+        <Input
+          placeholder={""}
+          label="Name"
+          name="name"
+          value={formData.name ? formData.name : employees.name}
+          onChange={handleChange}
+        />
+        <Input
+          placeholder={""}
+          label="Nationality"
+          name="nationality"
+          value={
+            formData.nationality ? formData.nationality : employees.nationality
+          }
+          onChange={handleChange}
+        />
+        <Input
+          placeholder={""}
+          label="Role"
+          name="role"
+          value={formData.role ? formData.role : employees.role}
+          onChange={handleChange}
+        />
+        <Input
+          placeholder={""}
+          label="Birth date"
+          name="birth_date"
+          type="date"
+          value={
+            formData.birth_date ? formData.birth_date : employees.birth_date
+          }
+          onChange={handleChange}
+        />
+        <div>
+          <StyledLabel>department</StyledLabel>
+          <Select
+            name="department_id"
             value={
-              formData.nationality
-                ? formData.nationality
-                : employees.nationality
+              formData.department_id
+                ? formData.department_id
+                : employees.department_id
             }
             onChange={handleChange}
-          />
-          <Input
-            placeholder={""}
-            label="Role"
-            name="role"
-            value={formData.role ? formData.role : employees.role}
-            onChange={handleChange}
-          />
-          <Input
-            placeholder={""}
-            label="Birth date"
-            name="birth_date"
-            type="date"
-            value={
-              formData.birth_date ? formData.birth_date : employees.birth_date
-            }
-            onChange={handleChange}
-          />
-          <div>
-            <StyledLabel>department</StyledLabel>
-            <Select
-              name="department_id"
-              value={
-                formData.department_id
-                  ? formData.department_id
-                  : employees.department_id
-              }
-              onChange={handleChange}
-            >
-              {departments.map((department) => (
-                <option key={department.id} value={department.id}>
-                  {department.name}
-                </option>
-              ))}
-            </Select>
-          </div>
-          <div>
-            <StyledLabel>Avatar</StyledLabel>
-            <InputFile type="file" name="avatar" />
-          </div>
-          <Button type="submit">Edit Employee</Button>
-        </ContentForm>
-        <ContentLink>
-          <Link to="/" style={SecondaryLink}>
-            Back
-          </Link>
-        </ContentLink>
-      </Content>
-      <Footer>© 2021 - Offix</Footer>
-    </div>
+          >
+            {departments.map((department) => (
+              <option key={department.id} value={department.id}>
+                {department.name}
+              </option>
+            ))}
+          </Select>
+        </div>
+        <div>
+          <StyledLabel>Avatar</StyledLabel>
+          <InputFile type="file" name="avatar" />
+        </div>
+        <Button type="submit">Edit Employee</Button>
+      </ContentForm>
+      <ContentLink>
+        <Link to="/" style={SecondaryLink}>
+          Back
+        </Link>
+      </ContentLink>
+    </Content>
   );
 }
 

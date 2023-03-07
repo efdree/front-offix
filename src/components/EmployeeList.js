@@ -9,7 +9,7 @@ function EmployeeList({ employees }) {
   return (
     <WrapperUl>
       {employees.map((employee) => (
-        <EmployeeCard key={employee.id} employee={employee} />
+        <EmployeeCard key={employee.name} employee={employee} />
       ))}
     </WrapperUl>
   );
