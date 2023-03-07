@@ -1,10 +1,10 @@
-import { useState, useCallback } from "react";
 import styled from "@emotion/styled";
 import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
 import Input from "./Input";
-import { searchEmployees } from "../services/employees-service";
-import { debounce } from "../utils";
+import { useState, } from "react";
+import { useNavigate } from "react-router-dom";
+import debounce from "";
 
 const ContainHeader = styled.div`
   background: #f2f2f2;
@@ -20,36 +20,21 @@ const Brand = styled.img`
 
 function Header() {
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState([
-    {
-      name: "name",
-      nationality: "nationality",
-      role: "admin",
-      birth_date: "22-02-2022",
-      avatar: "avatar",
-      department_id: 1,
-    },
-  ]);
+
+    const navigate = useNavigate();
 
   function handleChange(event) {
     const data = event.target.value;
     setQuery(data);
-    searchMemoized(data);
+    data == ""  ? navigate(`/`) :
+    navigate(`/lookforEmployees/${data}`);
   }
 
-  const searchMemoized = useCallback(
-    debounce((query) => {
-      const nowResult = searchEmployees(query);
-      console.log(nowResult);
-      setResults(nowResult);
-    }, 2000),
-    [searchEmployees]
-  );
+
 
   return (
-    <div>
       <ContainHeader>
-        <Link to="/">
+      <Link to="/">
           <Brand src={logo} alt="logo" />
         </Link>
         <Input
@@ -59,7 +44,6 @@ function Header() {
           onChange={handleChange}
         />
       </ContainHeader>
-    </div>
   );
 }
 

@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { getEmployee, updateEmployee } from "../services/employees-service";
-import { getDepartments } from "../services/departments-service";
 import FormEmployee from "../components/formEmployee";
 
 function EditEmployee() {
@@ -55,11 +54,6 @@ function EditEmployee() {
     navigate(`/showDepartment/${employees.department_id}`);
   }
 
-  const [departments, setDepartments] = useState([]);
-  useEffect(() => {
-    getDepartments().then(setDepartments);
-  }, []);
-
   return (
     <FormEmployee 
       title={"Edit Employee"}
@@ -76,7 +70,7 @@ function EditEmployee() {
       selectDepartment={formData.department_id
         ? formData.department_id
         : employees.department_id}
-      selectOption={""}
+      selectOption={<option value="0">{"--Choose an option--"}</option>}
       submit={"Edit Employee"}
       />
   );
