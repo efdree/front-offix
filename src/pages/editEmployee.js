@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { getEmployee, updateEmployee } from "../services/employees-service";
 import FormEmployee from "../components/formEmployee";
+import UploadImages from "../services/cloudinary-service.js";
 
 function EditEmployee() {
   const navigate = useNavigate();
@@ -36,6 +37,16 @@ function EditEmployee() {
     setFormData({ ...formData, [name]: value });
   }
 
+  const [image, setImage] = useState("");
+  
+  function handleUploadImage(event){
+    const files = event.target.files;
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "mxhekubc");
+    UploadImages(data).then((data) => setImage(data.secure_url));
+  }
+
   function handleSubmit(event) {
     formData.name = formData.name ? formData.name : employees.name;
     formData.nationality = formData.nationality
@@ -45,7 +56,7 @@ function EditEmployee() {
     formData.birth_date = formData.birth_date
       ? formData.birth_date
       : employees.birth_date;
-    formData.avatar = formData.avatar ? formData.avatar : employees.avatar;
+    formData.avatar = image ? image : employees.avatar;
     formData.department_id = formData.department_id
       ? formData.department_id
       : employees.department_id;
@@ -71,6 +82,7 @@ function EditEmployee() {
         ? formData.department_id
         : employees.department_id}
       selectOption={<option value="0">{"--Choose an option--"}</option>}
+      onChangeFile={handleUploadImage}
       submit={"Edit Employee"}
       />
   );

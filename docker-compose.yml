@@ -1,0 +1,7 @@
+services:
+  front-offix:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:3000"

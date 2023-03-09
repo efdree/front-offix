@@ -71,6 +71,7 @@ function FormDepartment({
     valueInput,
     valueText,
     onChange,
+    onChangeFile,
     submit
 }){
     return (
@@ -93,7 +94,7 @@ function FormDepartment({
         />
         <div>
           <StyledLabel>Cover</StyledLabel>
-          <InputFile type="file" name="cover" />
+          <InputFile type="file" name="cover" onChange={onChangeFile}/>
         </div>
         <Button type="submit">{submit}</Button>
       </ContentForm>

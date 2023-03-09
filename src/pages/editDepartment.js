@@ -6,6 +6,7 @@ import {
   updateDepartment,
 } from "../services/departments-service";
 import FormDepartment from "../components/formDepartment";
+import UploadImages from "../services/cloudinary-service.js";
 
 function EditDepartment() {
   const navigate = useNavigate();
@@ -37,12 +38,22 @@ function EditDepartment() {
     setFormData({ ...formData, [name]: value });
   }
 
+  const [image, setImage] = useState("");
+  
+  function handleUploadImage(event){
+    const files = event.target.files;
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "mxhekubc");
+    UploadImages(data).then((data) => setImage(data.secure_url));
+  }
+
   function handleSubmit(event) {
     formData.name = formData.name ? formData.name : departments[0].name;
     formData.description = formData.description
       ? formData.description
       : departments[0].description;
-    formData.cover = formData.cover ? formData.cover : departments[0].cover;
+    formData.cover = image ? image : departments[0].cover;
     formData.employee_count = departments[0].employee_count;
     event.preventDefault();
     updateDepartment(params.id, formData);
@@ -60,6 +71,7 @@ function EditDepartment() {
       ? formData.description
       : departments[0].description} 
       onChange={handleChange} 
+      onChangeFile={handleUploadImage}
       submit={"Edit Departmet"}/>
   );
 }

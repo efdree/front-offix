@@ -2,6 +2,7 @@ import { useState  } from "react";
 import { useNavigate } from "react-router-dom";
 import { createEmployee } from "../services/employees-service";
 import FormEmployee from "../components/formEmployee";
+import UploadImages from "../services/cloudinary-service.js";
 
 function NewEmployee() {
   const navigate = useNavigate();
@@ -20,9 +21,19 @@ function NewEmployee() {
     setFormData({ ...formData, [name]: value });
   }
 
+  const [image, setImage] = useState("");
+  
+  function handleUploadImage(event){
+    const files = event.target.files;
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "mxhekubc");
+    UploadImages(data).then((data) => setImage(data.secure_url));
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(formData);
+    formData.avatar = image;
     createEmployee(formData);
     navigate(`/showDepartment/${formData.department_id}`);
   }
@@ -42,6 +53,7 @@ function NewEmployee() {
       inputBirthDate={formData.birth_date}
       selectDepartment={formData.department_id}
       selectOption={<option value="0">{"--Choose an option--"}</option>}
+      onChangeFile={handleUploadImage}
       submit={"Create Employee"}
       />
     

@@ -87,6 +87,7 @@ function FormEmployee({
     inputBirthDate,
     selectDepartment,
     selectOption,
+    onChangeFile,
     submit
 }){
 
@@ -145,7 +146,7 @@ function FormEmployee({
         </div>
         <div>
           <StyledLabel>Avatar</StyledLabel>
-          <InputFile type="file" name="avatar" />
+          <InputFile type="file" name="avatar" onChange={onChangeFile}/>
         </div>
         <Button type="submit">{submit}</Button>
       </ContentForm>
